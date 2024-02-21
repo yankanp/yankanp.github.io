@@ -57,19 +57,25 @@ table {
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<!-- Add a button to toggle the sidebar on smaller screens -->
+<div class="w3-hide-large">
+  <button class="w3-bar-item w3-button w3-padding w3-text-teal" onclick="w3_open()">☰ Menu</button>
+</div>
+
+<!-- Sidebar navigation -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
+  <br>
   <div class="w3-container">
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
     <img src="yankan.jpg" style="width:45%;" class="w3-round"><br><br>
     <h4><b>Priyankan Kirupaharan</b></h4>
-    <p class="w3-text-grey">2nd year PhD student at University of Rhode Island (URI), USA. </p>
+    <p class="w3-text-grey">2nd year PhD student at University of Rhode Island (URI), USA.</p>
   </div>
   <div class="w3-bar-block">
-    <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>Priyankan Kirupaharan</a> 
-    <a href="#publications" class="w3-bar-item w3-button w3-padding"><i class="fa fa-paperclip fa-fw w3-margin-right"></i>Publications</a> 
+    <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>Priyankan Kirupaharan</a>
+    <a href="#publications" class="w3-bar-item w3-button w3-padding"><i class="fa fa-paperclip fa-fw w3-margin-right"></i>Publications</a>
     <a href="Resume_piriyankan.pdf" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-file-o fa-fw w3-margin-right"></i>Resume</a>
   </div>
   <hr>
@@ -79,10 +85,20 @@ table {
     <a href="mailto: pkirupaharan@uri.edu" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope-square fa-fw w3-margin-right"></i>Email</a>
     <a href="https://scholar.google.com/citations?user=JHVRaz8AAAAJ&hl=en" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-google-plus-square fa-fw w3-margin-right"></i>Google Scholar</a>
     <a class="w3-bar-item w3-button w3-padding"><i class="fa fa-location-arrow fa-fw w3-margin-right"></i>Kingston, RI</a>
-
-
   </div>
 </nav>
+
+<!-- JavaScript to toggle the sidebar -->
+<script>
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+  }
+</script>
+
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
