@@ -1,289 +1,812 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Priyankan Kirupaharan</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-div.scroll {
-  height: 300px;
-  overflow-y: scroll;
-}
-table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+  <title>Priyankan Kirupaharan | HCI Researcher (Accessibility + XR)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
+  <!-- Keep your existing libs -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,600,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        .column1 {
-            width: 20%;
-        }
+  <style>
+    /* =========================
+       THEME TOKENS (Dark default)
+       ========================= */
+    :root{
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --radius: 18px;
 
-        .column2 {
-            width: 90%;
-        }
-        img {
-        width: 50px; /* Set the width to your desired icon size */
-        height: auto;
+      --bg: #0b1220;
+      --surface: #0f1a2e;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.09);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.72);
+      --muted2: rgba(255,255,255,0.60);
+      --border: rgba(255,255,255,0.10);
+      --accent: #34d399; /* green-teal */
+      --accent2:#60a5fa; /* blue */
+      --warn:#fbbf24;    /* amber */
+      --danger:#f87171;  /* red */
     }
-        .no-lines tr,
-        .no-lines th,
-        .no-lines td {
-            border: none;
-        }
-        a {
-  color: blue;
-}
-</style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-08W18NWHWE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    /* System preference: light (only used if no saved theme) */
+    @media (prefers-color-scheme: light) {
+      :root{
+        --bg: #f7fafc;
+        --surface: #ffffff;
+        --card: rgba(2,6,23,0.04);
+        --card2: rgba(2,6,23,0.06);
+        --text: rgba(2,6,23,0.92);
+        --muted: rgba(2,6,23,0.72);
+        --muted2: rgba(2,6,23,0.60);
+        --border: rgba(2,6,23,0.10);
+        --shadow: 0 18px 50px rgba(2,6,23,0.08);
+      }
+    }
 
-  gtag('config', 'G-08W18NWHWE');
-</script>
+    /* Explicit override: Light */
+    html[data-theme="light"]{
+      --bg: #f7fafc;
+      --surface: #ffffff;
+      --card: rgba(2,6,23,0.04);
+      --card2: rgba(2,6,23,0.06);
+      --text: rgba(2,6,23,0.92);
+      --muted: rgba(2,6,23,0.72);
+      --muted2: rgba(2,6,23,0.60);
+      --border: rgba(2,6,23,0.10);
+      --shadow: 0 18px 50px rgba(2,6,23,0.08);
+    }
 
+    /* Explicit override: Dark */
+    html[data-theme="dark"]{
+      --bg: #0b1220;
+      --surface: #0f1a2e;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.09);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.72);
+      --muted2: rgba(255,255,255,0.60);
+      --border: rgba(255,255,255,0.10);
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+    }
+
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+    body{
+      background: radial-gradient(1200px 700px at 20% 15%, rgba(96,165,250,0.25), transparent 55%),
+                  radial-gradient(900px 600px at 75% 25%, rgba(52,211,153,0.20), transparent 55%),
+                  radial-gradient(1100px 900px at 40% 90%, rgba(248,113,113,0.16), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+    }
+
+    /* Light mode: softer background gradients (less “neon”) */
+    html[data-theme="light"] body{
+      background: radial-gradient(1200px 700px at 20% 15%, rgba(96,165,250,0.10), transparent 55%),
+                  radial-gradient(900px 600px at 75% 25%, rgba(52,211,153,0.08), transparent 55%),
+                  radial-gradient(1100px 900px at 40% 90%, rgba(248,113,113,0.06), transparent 55%),
+                  var(--bg);
+    }
+
+    /* W3 main content max width */
+    .page-wrap{max-width: 1180px; margin: 0 auto;}
+
+    /* Sidebar */
+    .w3-sidebar{
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      backdrop-filter: blur(10px);
+      border-right: 1px solid var(--border);
+    }
+    .sidebar-inner{padding: 12px 18px 18px 18px;}
+    .avatar{
+      width: 96px; height: 96px; object-fit: cover; border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.20);
+    }
+    .name{font-size: 20px; margin: 10px 0 4px 0;}
+    .tagline{font-size: 13px; color: var(--muted);}
+    .pill{
+      display:inline-block; padding: 6px 10px; border-radius: 999px;
+      background: rgba(52,211,153,0.12);
+      border: 1px solid rgba(52,211,153,0.25);
+      color: var(--text);
+      font-size: 12px; margin-top: 10px;
+    }
+    .sidebar-link{
+      border-radius: 12px;
+      margin: 4px 10px;
+      color: var(--text);
+    }
+    .sidebar-link:hover{
+      background: rgba(255,255,255,0.08) !important;
+    }
+    html[data-theme="light"] .sidebar-link:hover{
+      background: rgba(2,6,23,0.06) !important;
+    }
+    .sidebar-link i{color: var(--accent);}
+
+    /* Top nav for small screens */
+    .topbar{
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11,18,32,0.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    html[data-theme="light"] .topbar{
+      background: rgba(247,250,252,0.75);
+    }
+
+    /* Layout */
+    .w3-main{margin-left:320px;}
+    @media (max-width: 992px){
+      .w3-main{margin-left:0;}
+    }
+
+    /* Sections */
+    .section{padding: 24px 24px 6px 24px;}
+    .section h1{font-size: 30px; margin: 0 0 10px 0; letter-spacing: 0.2px;}
+    .section h2{font-size: 18px; color: var(--muted); margin: 0 0 16px 0; font-weight: 600;}
+
+    /* Hero */
+    .hero{padding: 26px 24px 10px 24px;}
+    .hero-card{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .hero-kicker{
+      display:flex; gap:10px; flex-wrap: wrap; align-items:center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .hero-title{
+      font-size: 34px;
+      font-weight: 700;
+      margin: 10px 0 10px 0;
+      line-height: 1.15;
+    }
+    .hero-title span{color: var(--accent);}
+    .hero-sub{
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0 0 16px 0;
+      max-width: 850px;
+    }
+    .cta-row{display:flex; gap:10px; flex-wrap: wrap;}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .btn:hover{background: var(--card2);}
+    .btn.primary{
+      background: rgba(52,211,153,0.18);
+      border: 1px solid rgba(52,211,153,0.35);
+    }
+    .btn.primary:hover{background: rgba(52,211,153,0.26);}
+    .btn.secondary{
+      background: rgba(96,165,250,0.14);
+      border: 1px solid rgba(96,165,250,0.32);
+    }
+    .btn.secondary:hover{background: rgba(96,165,250,0.20);}
+
+    /* Grid cards */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .card{
+      grid-column: span 12;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 16px;
+    }
+    .card:hover{background: var(--card2);}
+    .card h3{
+      font-size: 16px; margin: 0 0 10px 0;
+      display:flex; align-items:center; gap:10px;
+    }
+    .card h3 i{color: var(--accent2);}
+    .card p{color: var(--muted); margin: 0; line-height: 1.55; font-size: 14px;}
+    .card small{color: var(--muted2);}
+    .card .meta{margin-top: 10px; color: var(--muted2); font-size: 13px;}
+    .card .tags{margin-top: 10px; display:flex; gap:8px; flex-wrap:wrap;}
+    .tag{
+      font-size: 12px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+    html[data-theme="light"] .tag{
+      background: rgba(2,6,23,0.03);
+    }
+    .tag.green{border-color: rgba(52,211,153,0.35); background: rgba(52,211,153,0.10); color: var(--text);}
+    .tag.blue{border-color: rgba(96,165,250,0.35); background: rgba(96,165,250,0.10); color: var(--text);}
+    .tag.amber{border-color: rgba(251,191,36,0.35); background: rgba(251,191,36,0.10); color: var(--text);}
+
+    /* Two/three-column layout */
+    @media (min-width: 900px){
+      .span-6{grid-column: span 6;}
+      .span-4{grid-column: span 4;}
+      .span-8{grid-column: span 8;}
+    }
+
+    /* Publications */
+    .pub{
+      display:flex; gap: 12px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      margin-bottom: 10px;
+    }
+    .pub:hover{background: var(--card2);}
+    .pub .year{
+      width: 74px; min-width: 74px;
+      font-weight: 700;
+      color: var(--text);
+      padding-top: 2px;
+    }
+    .pub .body{flex:1;}
+    .pub .title{font-weight: 700; margin-bottom: 4px;}
+    .pub .venue{color: var(--muted); font-size: 13px; margin-bottom: 8px;}
+    .pub .links a{
+      text-decoration:none;
+      margin-right: 10px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background: rgba(255,255,255,0.04);
+    }
+    html[data-theme="light"] .pub .links a{
+      background: rgba(2,6,23,0.03);
+    }
+    .pub .links a:hover{background: rgba(255,255,255,0.08);}
+    html[data-theme="light"] .pub .links a:hover{background: rgba(2,6,23,0.06);}
+    .pub .links i{color: var(--accent);}
+
+    /* Updates list */
+    .timeline{margin: 0; padding: 0; list-style: none;}
+    .timeline li{
+      padding: 12px 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+      margin-bottom: 10px;
+      display:flex;
+      gap: 12px;
+    }
+    .timeline li:hover{background: var(--card2);}
+    .timeline .tdate{
+      width: 110px; min-width: 110px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .timeline .ttext{color: var(--muted); line-height: 1.5;}
+    .timeline a{color: var(--text);}
+
+    /* Study banner */
+    .study{
+      border-radius: var(--radius);
+      border: 1px solid rgba(251,191,36,0.35);
+      background: linear-gradient(180deg, rgba(251,191,36,0.12), var(--card));
+      padding: 18px;
+    }
+    .study h3{margin: 0 0 8px 0; font-size: 16px;}
+    .study p{margin: 0; color: var(--muted); line-height: 1.55; font-size: 14px;}
+    .study .row{display:flex; gap:10px; flex-wrap: wrap; margin-top: 12px;}
+    .note{font-size: 12px; color: var(--muted2); margin-top: 10px;}
+
+    /* Footer */
+    .footer{
+      padding: 22px 24px 40px 24px;
+      color: var(--muted2);
+      font-size: 12px;
+    }
+
+    /* Make anchor links look clean */
+    a{color: var(--text);}
+    a:hover{opacity: 0.95;}
+
+    /* W3 overlay */
+    .w3-overlay{background: rgba(0,0,0,0.55);}
+
+    /* Reduce button "w3" styles inside content */
+    .w3-button{border-radius: 12px;}
+
+    /* Small helper for the theme toggle button */
+    .theme-btn{
+      width: 100%;
+      text-align: left;
+      border-radius: 12px;
+      margin: 8px 10px 2px 10px;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    .theme-btn:hover{
+      background: rgba(255,255,255,0.08);
+    }
+    html[data-theme="light"] .theme-btn:hover{
+      background: rgba(2,6,23,0.06);
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-08W18NWHWE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-08W18NWHWE');
+  </script>
 </head>
-<body class="w3-light-grey w3-content" style="max-width:1600px">
 
-<!-- Add a button to toggle the sidebar on smaller screens -->
-<div class="w3-hide-large">
-  <button class="w3-bar-item w3-button w3-padding w3-text-teal" onclick="w3_open()">☰ Menu</button>
+<body class="w3-content" style="max-width:1600px">
+
+<!-- Top bar for small screens -->
+<div class="topbar w3-hide-large">
+  <button class="w3-bar-item w3-button w3-padding w3-text-white" onclick="w3_open()">
+    ☰ Menu
+  </button>
+
+  <!-- Mobile theme toggle -->
+  <button class="w3-bar-item w3-button w3-padding w3-text-white" onclick="toggleTheme()" style="float:right;">
+    <i class="fa fa-adjust"></i>
+  </button>
 </div>
 
-<!-- Sidebar navigation -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
-  <br>
-  <div class="w3-container">
-    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-collapse w3-animate-left" style="z-index:3;width:300px;" id="mySidebar" aria-label="Sidebar navigation">
+  <div class="sidebar-inner">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-hide-large w3-right w3-xxlarge w3-padding" title="Close menu" aria-label="Close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <img src="yankan.jpg" style="width:45%;" class="w3-round"><br><br>
-    <h4><b>Priyankan Kirupaharan</b></h4>
-    <p class="w3-text-grey">PhD student at University of Rhode Island (URI), USA.</p>
-  </div>
-  <div class="w3-bar-block">
-    <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>Priyankan Kirupaharan</a>
-    <a href="#publications" class="w3-bar-item w3-button w3-padding"><i class="fa fa-paperclip fa-fw w3-margin-right"></i>Publications</a>
-    <a href="Resume_piriyankan.pdf" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-file-o fa-fw w3-margin-right"></i>Resume</a>
-  </div>
-  <hr>
-  <div class="w3-bar-block">
-    <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-github-square fa-fw w3-margin-right"></i>GitHub</a>
-    <a href="https://www.linkedin.com/in/priyankank/" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-linkedin-square fa-fw w3-margin-right"></i>LinkedIn</a>
-    <a href="mailto: pkirupaharan@uri.edu" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope-square fa-fw w3-margin-right"></i>Email</a>
-    <a href="https://scholar.google.com/citations?user=JHVRaz8AAAAJ&hl=en" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-google-plus-square fa-fw w3-margin-right"></i>Google Scholar</a>
-    <a class="w3-bar-item w3-button w3-padding"><i class="fa fa-location-arrow fa-fw w3-margin-right"></i>Kingston, RI</a>
+
+    <img src="yankan.jpg" alt="Portrait of Priyankan Kirupaharan" class="avatar"><br>
+    <div class="name"><b>Priyankan Kirupaharan</b></div>
+    <div class="tagline">PhD Candidate, University of Rhode Island • ASSET Lab</div>
+    <div class="pill"><i class="fa fa-universal-access"></i> Accessibility + XR • Applied HCI</div>
+
+    <hr style="border-color: var(--border);">
+
+    <div class="w3-bar-block">
+      <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button w3-padding sidebar-link">
+        <i class="fa fa-user fa-fw w3-margin-right"></i>Overview
+      </a>
+      <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button w3-padding sidebar-link">
+        <i class="fa fa-lightbulb-o fa-fw w3-margin-right"></i>Selected Work
+      </a>
+      <a href="#updates" onclick="w3_close()" class="w3-bar-item w3-button w3-padding sidebar-link">
+        <i class="fa fa-bullhorn fa-fw w3-margin-right"></i>Updates
+      </a>
+      <a href="#publications" onclick="w3_close()" class="w3-bar-item w3-button w3-padding sidebar-link">
+        <i class="fa fa-paperclip fa-fw w3-margin-right"></i>Publications
+      </a>
+      <a href="Resume_piriyankan.pdf" target="_blank" class="w3-bar-item w3-button w3-padding sidebar-link">
+        <i class="fa fa-file-pdf-o fa-fw w3-margin-right"></i>Resume (PDF)
+      </a>
+    </div>
+
+    <!-- Theme toggle (Sidebar) -->
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle color theme">
+      <i class="fa fa-moon-o fa-fw w3-margin-right"></i>Dark mode
+    </button>
+
+    <hr style="border-color: var(--border);">
+
+    <div class="w3-bar-block">
+      <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding sidebar-link">
+        <i class="fa fa-github fa-fw w3-margin-right"></i>GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/priyankank/" target="_blank" class="w3-bar-item w3-button w3-padding sidebar-link">
+        <i class="fa fa-linkedin fa-fw w3-margin-right"></i>LinkedIn
+      </a>
+      <a href="mailto:pkirupaharan@uri.edu" class="w3-bar-item w3-button w3-padding sidebar-link">
+        <i class="fa fa-envelope fa-fw w3-margin-right"></i>Email
+      </a>
+      <a href="https://scholar.google.com/citations?user=JHVRaz8AAAAJ&hl=en" target="_blank" class="w3-bar-item w3-button w3-padding sidebar-link">
+        <i class="fa fa-graduation-cap fa-fw w3-margin-right"></i>Google Scholar
+      </a>
+      <div class="w3-bar-item w3-padding" style="opacity:0.95;">
+        <i class="fa fa-location-arrow fa-fw w3-margin-right" style="color:var(--accent);"></i>Kingston, RI
+      </div>
+    </div>
+
+    <div class="note">
+      Recruiter-friendly: clear impact, shipped apps, top-tier HCI venues.
+    </div>
   </div>
 </nav>
 
-<!-- JavaScript to toggle the sidebar -->
-<script>
-  function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-  }
-
-  function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-  }
-</script>
-
-
-<!-- Overlay effect when opening sidebar on small screens -->
+<!-- Overlay on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-<div class="w3-main" style="margin-left:320px; margin-right: 200px;">
+<!-- Main content -->
+<div class="w3-main">
+  <div class="page-wrap">
 
-  <div class="w3-row-padding w3-padding-16" id="home">
-    <h1>About me</h1>
-    <div style="text-align: justify;">
-    <p>
-      Hello! My name is Priyankan Kirupaharan and I am a Computer Science PhD student at the University of Rhode Island. Currently, I am pursuing my academic journey with a keen focus on Virtual Reality, A11y and HCI4D. I have the privilege of being guided by <a href="https://kven.me/">Prof. Krishna Venkatasubramanian</a> and also been lucky to collaborate with <a href="https://ranalli.weebly.com/">Dr. Tina-Marie Ranalli </a>.
-    </p>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-card">
+        <div class="hero-kicker">
+          <span class="tag green"><i class="fa fa-universal-access"></i> Accessibility</span>
+          <span class="tag blue"><i class="fa fa-cube"></i> XR / VR</span>
+          <span class="tag amber"><i class="fa fa-users"></i> Human-Centered Design</span>
+          <span class="tag"><i class="fa fa-code"></i> Research + Prototyping</span>
+        </div>
 
-    <p>
-      I did my undergraduate at University of Sri Jayewardenepura, Sri Lanka with major and honors in Computer Science and minors in Mathematics and Physics. I have industrial experience as software developer for 4 years developing enterprise application in Spring boot.
-    </p>
+        <div class="hero-title">
+          I design <span>accessible immersive experiences</span> and build prototypes that ship.
+        </div>
 
-  </div>
-  <hr style="border: 1px solid black;">
-   <h1 style="display: inline; color: red; font-weight: bold;">Join Our Study on VR! <img src="VR_icon.png"></h1>
-  
-     <h1 style="color: #333; font-size: 36px;">Participants Wanted!</h1>
-    <p style="color: #666; font-size: 18px;">Researchers from the  <a target="_blank" href="https://kven.me/asset/">ASSET research group</a> at the University of Rhode Island
-need your help to develop guidelines for the development of accessible virtual reality
-(VR) apps for adults with intellectual or developmental disabilities (I/DD).</p>
-    
-    <div style="margin-top: 30px;">
-        <p style="color: #444; font-size: 20px;">Requirements:</p>
-        <ul style="list-style-type: none; padding-left: 0;">
-            <li style="color: #666; font-size: 16px; margin-bottom: 5px;">Must be at least 18 years of age</li>
-            <li style="color: #666; font-size: 16px; margin-bottom: 5px;">Should have some form of I/DD</li>
-        </ul>
+        <p class="hero-sub">
+          I’m a Computer Science PhD candidate at the University of Rhode Island (ASSET Lab), working on accessibility and immersive technology.
+          My research focuses on making VR usable and empowering for adults with intellectual and developmental disabilities (I/DD),
+          and translating insights into practical design guidance and deployed applications.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="Resume_piriyankan.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>View Resume</a>
+          <a class="btn secondary" href="#publications"><i class="fa fa-paperclip"></i>See Publications</a>
+          <a class="btn" href="mailto:pkirupaharan@uri.edu"><i class="fa fa-envelope"></i>Contact</a>
+          <a class="btn" href="https://www.linkedin.com/in/priyankank/" target="_blank"><i class="fa fa-linkedin"></i>Connect</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY ME / VALUE -->
+    <section class="section" id="value">
+      <h1>What I bring</h1>
+      <h2>Research rigor + product thinking + systems engineering</h2>
+
+      <div class="grid">
+        <div class="card span-4">
+          <h3><i class="fa fa-search"></i> Research impact</h3>
+          <p>Published in top HCI and accessibility venues (CHI, DIS, TACCESS) and ACM flagship magazine (CACM), translating findings into practical guidance.</p>
+          <div class="meta"><small>Strength: qualitative methods, thematic analysis, co-design, accessibility evaluation</small></div>
+        </div>
+
+        <div class="card span-4">
+          <h3><i class="fa fa-mobile"></i> Shipped applications</h3>
+          <p>Co-designed and developed mobile apps supporting safety and self-care for adults with I/DD—released on major app stores.</p>
+          <div class="meta"><small>Strength: end-to-end prototyping → deployment</small></div>
+        </div>
+
+        <div class="card span-4">
+          <h3><i class="fa fa-cogs"></i> Engineering leadership</h3>
+          <p>Former Associate Tech Lead in fintech—built microservices and DevOps pipelines; improved API performance by ~40% via profiling and caching.</p>
+          <div class="meta"><small>Strength: Java/Spring, Docker/Kubernetes, CI/CD</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK -->
+    <section class="section" id="work">
+      <h1>Selected work</h1>
+      <h2>A quick tour of projects recruiters ask about</h2>
+
+      <div class="grid">
+        <div class="card span-6">
+          <h3><i class="fa fa-vr-cardboard"></i> VR Accessibility for Adults with I/DD (DIS 2025)</h3>
+          <p>
+            Designed and conducted an accessibility-focused VR study and synthesized findings into actionable design recommendations.
+            Communicated outcomes through clear storytelling and visual presentations to support practitioners and researchers.
+          </p>
+          <div class="tags">
+            <span class="tag green">Accessibility</span>
+            <span class="tag blue">VR</span>
+            <span class="tag">Qualitative Study</span>
+            <span class="tag">Design Recommendations</span>
+          </div>
+          <div class="meta"><small>Tip for recruiters: Ask me about study design decisions, findings-to-guidelines pipeline, and how I validate themes.</small></div>
+        </div>
+
+        <div class="card span-6">
+          <h3><i class="fa fa-shield"></i> R3: Recognize, Report, Respond (Shipped)</h3>
+          <p>
+            Participatory-design mobile app that teaches adults with I/DD about abuse awareness and reporting.
+            Built for real-world use and released on major app stores.
+          </p>
+          <div class="tags">
+            <span class="tag green">Participatory Design</span>
+            <span class="tag">Flutter</span>
+            <span class="tag">Trauma-informed</span>
+            <span class="tag">Deployment</span>
+          </div>
+        </div>
+
+        <div class="card span-6">
+          <h3><i class="fa fa-heartbeat"></i> S2: Self-Care & Support (Shipped)</h3>
+          <p>
+            Co-designed and developed a mobile app to help adults with I/DD self-regulate post-trauma using guided exercises and motivational prompts.
+          </p>
+          <div class="tags">
+            <span class="tag green">Self-care</span>
+            <span class="tag">Flutter</span>
+            <span class="tag">Accessibility</span>
+            <span class="tag">Behavioral Support</span>
+          </div>
+        </div>
+
+        <div class="card span-6">
+          <h3><i class="fa fa-cloud"></i> Fintech Microservices + DevOps (Industry)</h3>
+          <p>
+            Designed and developed microservices for a fintech application; improved API performance by ~40% via profiling and caching.
+            Deployed services with Docker/Kubernetes and CI/CD (Jenkins) across multiple environments.
+          </p>
+          <div class="tags">
+            <span class="tag blue">Java/Spring</span>
+            <span class="tag">Microservices</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDY RECRUITMENT -->
+    <section class="section" id="study">
+      <h1>Participant recruitment</h1>
+      <h2>Help us build better accessibility guidelines for VR</h2>
+
+      <div class="study">
+        <h3><i class="fa fa-handshake-o"></i> Join our VR accessibility study</h3>
+        <p>
+          Researchers from the <a target="_blank" href="https://kven.me/asset/">ASSET research group</a> at the University of Rhode Island
+          are conducting a study to develop guidelines for accessible VR apps for adults with intellectual or developmental disabilities (I/DD).
+        </p>
+
+        <div class="row">
+          <span class="tag amber">18+ years old</span>
+          <span class="tag amber">Adult with I/DD</span>
+          <span class="tag">Compensation provided</span>
+        </div>
+
+        <div class="row" style="margin-top:12px;">
+          <a class="btn primary" href="mailto:asset.uri@proton.me"><i class="fa fa-envelope"></i>Email: asset.uri@proton.me</a>
+          <a class="btn" href="#publications"><i class="fa fa-paperclip"></i>See related work</a>
+        </div>
+
+        <div class="note">
+          If you’re a caregiver/supporter and want to learn more, email us—happy to share details and eligibility criteria.
+        </div>
+      </div>
+    </section>
+
+    <!-- UPDATES -->
+    <section class="section" id="updates">
+      <h1>Updates</h1>
+      <h2>Recent milestones and announcements</h2>
+
+      <ul class="timeline">
+        <li>
+          <div class="tdate">Nov 2025</div>
+          <div class="ttext">Winner, Hack@URI Mini HackDay - Google Gemini • Developed a VR application for interactive learning of human anatomy</div>
+        </li>
+        <li>
+          <div class="tdate">Jul 2025</div>
+          <div class="ttext">Presented “Understanding the Accessibility of Single-User Virtual Reality Environments for Adults with I/DD” at <b>ACM DIS 2025</b> (Madeira, Portugal).</div>
+        </li>
+        <li>
+          <div class="tdate">Apr 2025</div>
+          <div class="ttext">Presented a poster at the Third Annual International Graduate Student Showcase at URI.</div>
+        </li>
+        <li>
+          <div class="tdate">Apr 2025</div>
+          <div class="ttext">Paper accepted at <b>ACM DIS 2025</b>.</div>
+        </li>
+        <li>
+          <div class="tdate">Aug 2024</div>
+          <div class="ttext">
+            Awarded an <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2408481" target="_blank"><b>NSF Human-Centered Computing (HCC)</b> grant</a> to design VR-mediated technologies supporting post-trauma self-regulation for adults with I/DD.
+          </div>
+        </li>
+        <li>
+          <div class="tdate">Dec 2023</div>
+          <div class="ttext">
+            R3 app featured in <a target="_blank" href="https://www.bostonglobe.com/2023/12/25/metro/5-tech-startups-apps-watch-rhode-island-2024/"><b>The Boston Globe</b></a>.
+          </div>
+        </li>
+        <li>
+          <div class="tdate">Apr 2023</div>
+          <div class="ttext">CHI 2023 paper received <b>Honorable Mention</b> (Top 5%).</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="section" id="publications">
+      <h1>Publications</h1>
+      <h2>Selected peer-reviewed work (with quick links)</h2>
+
+      <div class="pub">
+        <div class="year">2025</div>
+        <div class="body">
+          <div class="title">Understanding the Accessibility of Single-User Virtual Reality Environments for Adults with Intellectual and Developmental Disabilities</div>
+          <div class="venue">ACM Designing Interactive Systems (DIS) 2025 • Kirupaharan, Ranalli, Venkatasubramanian</div>
+          <div class="links">
+            <a href="https://dl.acm.org/doi/full/10.1145/3715336.3735782" target="_blank"><i class="fa fa-paperclip"></i>Paper</a>
+            <a href="#" onclick="copyBib('bib-dis25'); return false;"><i class="fa fa-quote-left"></i>BibTeX</a>
+          </div>
+          <pre id="bib-dis25" style="display:none;">
+@inproceedings{kirupaharan2025dis,
+  title={Understanding the Accessibility of Single-User Virtual Reality Environments for Adults with Intellectual and Developmental Disabilities},
+  author={Kirupaharan, Priyankan and Ranalli, Tina-Marie and Venkatasubramanian, Krishna},
+  booktitle={Proceedings of the 2025 ACM Designing Interactive Systems Conference (DIS '25)},
+  year={2025}
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="year">2024</div>
+        <div class="body">
+          <div class="title">A3C: An Image-Association-Based Computing Device Authentication Framework for People with Upper Extremity Impairments</div>
+          <div class="venue">ACM Transactions on Accessible Computing (TACCESS) 2024 • Lewis, Kirupaharan, Ranalli, Venkatasubramanian</div>
+          <div class="links">
+            <a href="https://dl.acm.org/doi/pdf/10.1145/3652522" target="_blank"><i class="fa fa-paperclip"></i>Paper</a>
+            <a href="#" onclick="copyBib('bib-taccess24'); return false;"><i class="fa fa-quote-left"></i>BibTeX</a>
+          </div>
+          <pre id="bib-taccess24" style="display:none;">
+@article{lewis2024a3c,
+  title={A3C: An Image-Association-Based Computing Device Authentication Framework for People with Upper Extremity Impairments},
+  author={Lewis, Brittany and Kirupaharan, Priyankan and Ranalli, Tina-Marie and Venkatasubramanian, Krishna},
+  journal={ACM Transactions on Accessible Computing (TACCESS)},
+  year={2024}
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="year">2024</div>
+        <div class="body">
+          <div class="title">Considering Trauma in Accessible Design for Adults with Intellectual and Developmental Disabilities</div>
+          <div class="venue">Communications of the ACM (CACM) 2024 • Venkatasubramanian, Ranalli, Kirupaharan, Cannon</div>
+          <div class="links">
+            <a href="#" class="disabled" style="pointer-events:none; opacity:0.7;"><i class="fa fa-paperclip"></i>Link</a>
+            <a href="#" onclick="copyBib('bib-cacm24'); return false;"><i class="fa fa-quote-left"></i>BibTeX</a>
+          </div>
+          <pre id="bib-cacm24" style="display:none;">
+@article{venkatasubramanian2024trauma,
+  title={Considering Trauma in Accessible Design for Adults with Intellectual and Developmental Disabilities},
+  author={Venkatasubramanian, Krishna and Ranalli, Tina-Marie and Kirupaharan, Priyankan and Cannon, L.},
+  journal={Communications of the ACM},
+  year={2024}
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="year">2023</div>
+        <div class="body">
+          <div class="title">'I... caught a person casing my house... and scared him off.': The Use of Security-focused Smart Home Devices by People with Disabilities (Honorable Mention)</div>
+          <div class="venue">ACM CHI 2023 • Lewis, Ranalli, Gourley, Kirupaharan, Venkatasubramanian</div>
+          <div class="links">
+            <a href="https://dl.acm.org/doi/10.1145/3544548.3581007" target="_blank"><i class="fa fa-paperclip"></i>Paper</a>
+            <a href="#" onclick="copyBib('bib-chi23'); return false;"><i class="fa fa-quote-left"></i>BibTeX</a>
+          </div>
+          <pre id="bib-chi23" style="display:none;">
+@inproceedings{lewis2023smarthome,
+  title={The Use of Security-focused Smart Home Devices by People with Disabilities},
+  author={Lewis, Brittany and Ranalli, Tina-Marie and Gourley, A. and Kirupaharan, Priyankan and Venkatasubramanian, Krishna},
+  booktitle={Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems},
+  year={2023},
+  note={Honorable Mention (Top 5%)}
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="year">2021</div>
+        <div class="body">
+          <div class="title">Mobile Application to Identify Fish Species Using YOLO and Convolutional Neural Networks</div>
+          <div class="venue">SLAAI AI Conference • Kirupaharan, Fernando</div>
+          <div class="links">
+            <a href="papers/Mobile Application to Identify Fish Species Using YOLO.pdf" target="_blank"><i class="fa fa-paperclip"></i>Paper</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      © <span id="yearNow"></span> Priyankan Kirupaharan • Built with accessibility in mind (semantic structure, contrast, keyboard-friendly nav).
     </div>
-    
-    <p style="color: #444; font-size: 20px; margin-top: 20px;">Participants will receive appropriate compensation at the conclusion of the study.</p>
-    
-    <p style="color: #333; font-size: 20px; margin-top: 30px;">Interested? Have questions?</p>
-    <p style="color: #666; font-size: 18px;">Email us at <a href="mailto:abc@gmail.com" style="color: #007bff; text-decoration: none;">asset.uri@proton.me</a></p>
-
-  
-    <hr style="border: 1px solid black;">
-
-  <h1>Updates</h1>
-  <div class="scroll">
-    <table class="no-lines">
-      <tr>
-          <th class="column1"></th>
-          <th class="column2"></th>
-      </tr>
-       <tr>
-        <td>July 2025</td>
-        <td>Presented “Understanding the Accessibility of Single-User Virtual Reality Environments for Adults with Intellectual and Developmental Disabilities” paper at ACM Designing Interactive Systems (DIS) 2025 conference at Madeira, Portugal</td>
-      </tr>
-      <tr>
-        <td>April 2025</td>
-        <td>Presented “Understanding the Accessibility of Single-User Virtual Reality Environments for Adults with Intellectual and Developmental Disabilities” poster at Third Annual International Graduate Student Showcase at URI</td>
-      </tr>
-
-      <tr>
-        <td>April 2025</td>
-        <td>Our paper “Understanding the Accessibility of Single-User Virtual Reality Environments for Adults with Intellectual and Developmental Disabilities” has been accepted at ACM DIS 2025</td>
-      </tr>
-
-      <tr>
-        <td>August 2024</td>
-        <td>Was awarded a new <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2408481" target="_blank"> National Science Foundation (NSF) Human-Centered Computing (HCC) grant </a> for design VR-mediated technologies that empower adults with intellectual and developmental disabilities to engage in independent post-trauma self-regulation to cope with the negative effects of trauma
-        </td>
-      </tr>
-
-      <tr>
-        <td>July 2024</td>
-        <td>Our paper “Considering Trauma in Accessible Design for People with Intellectual and Developmental Disabilities,” has been accepted at Communications of the ACM magazine.
-        </td>
-      </tr>
-
-      <tr>
-        <td>Mar 2024</td>
-        <td>B. Lewis, P. Kirupaharan, T-M. Ranalli, and K. Venkatasubramanian. ``A3C: An Image-Association-Based Computing Device Authentication Framework for People with Upper Extremity Impairments,'' ACM Transactions of Accessible Computing (TACCESS), 2024 (Accepted for publication) 
-        </td>
-      </tr>
-      <tr>
-          <td>December 2023</td>
-          <td>Our app designed to help individuals with intellectual and developmental disability recognize abuse and report was covered in <a target="_blank" href="https://www.bostonglobe.com/2023/12/25/metro/5-tech-startups-apps-watch-rhode-island-2024/">The Boston Globe</td>
-      </tr>
-       <tr>
-          <td>Nov 2023</td>
-          <td>K. Venkatasubramanian, T-M. Ranalli, P. Kirupaharan, D. Solanki, K. Mankodiya “Understanding the challenges nurses encounter with monitoring technologies in a NICU International Journal of Human-Computer Interaction.” International Journal of Human Computer Interaction (IJHCI).</td>
-      </tr>
-      <tr>
-          <td>May 2023</td>
-          <td>Our app designed to help individuals with intellectual and developmental disability recognize abuse and report has been released on the <a target="_blank" href="https://apps.apple.com/us/app/r3-recognize-report-respond/id6446331248">Apple app store</a> and <a target="_blank" href="https://www.amazon.com/Disabled-Persons-Protection-Commission-Recognize/dp/B0C6VG4YNC/">Amazon app store</a></td>
-      </tr>
-      <tr>
-          <td>April 2023</td>
-          <td>Brittany, Tina, Alex, and Priyankan's paper on the use of security-focused smart home devices by people with disabilities has received ACM CHI 2023 <p style="display: inline; color: red; font-weight: bold;">Honorable Mention Award.</p></td>
-      </tr>
-      <tr>
-          <td>Feb 2023</td>
-          <td>Brittany, Tina, Alex and Priyankan's paper “'I... caught a person casing my house... and scared him off:' The Use of Security-Focused Smart Home Devices by People with Disabilities” has been accepted at ACM CHI 2023.</td>
-      </tr>
-     
-      
-      
-      <!-- Add more rows as needed -->
-  </table>
-  </div>
 
   </div>
-
-  <hr style="border: 1px solid black;">
-  <div class="w3-row-padding w3-padding-16" id="publications">
-    <h1>Publications</h1>
-  <div class="scroll">
-    <table class="no-lines">
-      <tr>
-          <th class="column1"></th>
-          <th class="column2"></th>
-      </tr>
-      <tr>
-          <td>July 2025</td>
-          <td>P. Kirupaharan, T-M. Ranalli, and K. Venkatasubramanian. ``Understanding the Accessibility of Single-User Virtual Reality Environments for Adults with Intellectual and Developmental Disabilities,'' DIS '25: Proceedings of the 2025 ACM Designing Interactive Systems Conference
-          </br>
-          <a href="https://dl.acm.org/doi/full/10.1145/3715336.3735782" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-paperclip fa-fw w3-margin-right"></i>Paper</a> /
-          <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-youtube-square fa-fw w3-margin-right"></i>Talk</a>  / 
-          <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bitcoin fa-fw w3-margin-right"></i>Bibtex</a>
-        </td>
-      </tr>
-      <tr>
-          <td>May 2024</td>
-          <td>B. Lewis, P. Kirupaharan, T-M. Ranalli, and K. Venkatasubramanian. ``A3C: An Image-Association-Based Computing Device Authentication Framework for People with Upper Extremity Impairments,'' ACM Transactions of Accessible Computing (TACCESS), 2024 (Accepted for publication)
-          </br>
-          <a href="https://dl.acm.org/doi/pdf/10.1145/3652522" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-paperclip fa-fw w3-margin-right"></i>Paper</a> /
-          <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-youtube-square fa-fw w3-margin-right"></i>Talk</a>  / 
-          <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bitcoin fa-fw w3-margin-right"></i>Bibtex</a>
-        </td>
-      </tr>
-      <tr>
-          <td>Nov 2023</td>
-          <td>K. Venkatasubramanian, T-M. Ranalli, P. Kirupaharan, D. Solanki, K. Mankodiya “Understanding the challenges nurses encounter with monitoring technologies in a NICU International Journal of Human-Computer Interaction.” International Journal of Human Computer Interaction (IJHCI)
-          </br>
-          <a href="https://www.tandfonline.com/doi/full/10.1080/10447318.2023.2278297" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-paperclip fa-fw w3-margin-right"></i>Paper</a> /
-          <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-youtube-square fa-fw w3-margin-right"></i>Talk</a>  / 
-          <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bitcoin fa-fw w3-margin-right"></i>Bibtex</a>
-        </td>
-      </tr>
-      <tr>
-          <td>Feb 2023</td>
-          <td>'I... caught a person casing my house... and scared him off:' The Use of Security-Focused Smart Home Devices by People with Disabilities.
-            Brittany, Dr. Tina-Marie Ranalli , Alex, Priyankan and Prof. Krishna Venkatasubramanian 
-          </br>
-          <a href="https://dl.acm.org/doi/10.1145/3544548.3581007" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-paperclip fa-fw w3-margin-right"></i>Paper</a> /
-          <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-youtube-square fa-fw w3-margin-right"></i>Talk</a>  / 
-          <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bitcoin fa-fw w3-margin-right"></i>Bibtex</a>
-        </td>
-      </tr>
-      <tr>
-          <td>September 2021</td>
-          <td>Mobile Application to Identify Fish Species Using YOLO and Convolutional Neural Networks. Priyankan and Dr.TGI Fernando
-          </br>
-          <a href="papers/Mobile Application to Identify Fish Species Using YOLO.pdf" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-paperclip fa-fw w3-margin-right"></i>Paper</a> /
-          <a href="https://www.youtube.com/watch?v=PuuBARG4S-0" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-youtube-square fa-fw w3-margin-right"></i>Talk</a>  / 
-          <a href="https://github.com/yankanp" target="_blank" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bitcoin fa-fw w3-margin-right"></i>Bibtex</a>
-          </td>
-      </tr>
-    
-      
-      <!-- Add more rows as needed -->
-  </table>
-  </div>
-
-  </div>
-<!-- End page content -->
 </div>
 
 <script>
-// Script to open and close sidebar
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
- 
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
+  // Sidebar open/close
+  function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+  }
+  function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+  }
+
+  // Copy BibTeX helper
+  function copyBib(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    var text = el.innerText || el.textContent;
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function(){
+        alert("BibTeX copied to clipboard.");
+      });
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      alert("BibTeX copied to clipboard.");
+    }
+  }
+
+  // Theme: apply, toggle, init (saved preference > system preference)
+  function applyTheme(theme){
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+
+    const btn = document.getElementById("themeBtn");
+    if(btn){
+      if(theme === "dark"){
+        btn.innerHTML = '<i class="fa fa-sun-o fa-fw w3-margin-right"></i>Light mode';
+      } else {
+        btn.innerHTML = '<i class="fa fa-moon-o fa-fw w3-margin-right"></i>Dark mode';
+      }
+    }
+  }
+
+  function toggleTheme(){
+    const current = document.documentElement.getAttribute("data-theme");
+    const next = (current === "dark") ? "light" : "dark";
+    applyTheme(next);
+  }
+
+  (function initTheme(){
+    const saved = localStorage.getItem("theme");
+    if(saved){
+      applyTheme(saved);
+      return;
+    }
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    applyTheme(prefersDark ? "dark" : "light");
+  })();
+
+  // footer year
+  document.getElementById("yearNow").textContent = new Date().getFullYear();
 </script>
 
 </body>
